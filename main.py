@@ -139,9 +139,9 @@ def create_post(data: PostCreate):
     return result.data[0]
 
 @app.delete("/posts/{post_id}")
-def hide_post(post_id: str):
-    """게시물 숨김 (삭제 아닌 is_hidden=true)"""
-    result = supabase.table("posts").update({"is_hidden": True}).eq("id", post_id).execute()
+def delete_post(post_id: str):
+    """게시물 완전 삭제"""
+    supabase.table("posts").delete().eq("id", post_id).execute()
     return {"ok": True}
 
 # ══════════════════════════════════════════
